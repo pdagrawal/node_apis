@@ -5,11 +5,10 @@ const app = express();
 //mongoDB connection string
 const url = 'mongodb+srv://mongo-db-user:RkV8oQR70xzlB4g1@pdcluster0-fakv1.mongodb.net/test?retryWrites=true&w=majority';
 
-app.get('/', (req, res, next) => {
-    res.send('running node api');
-});
+const apiRoutes = require('./routes/api_routes.js');
+app.use('/', apiRoutes);
 
-mongoose.connect(url,{useNewUrlParser: true})
+mongoose.connect(url, {useNewUrlParser: true})
   .then(()=>{
     app.listen(3000);
     console.log('database connected!');})
