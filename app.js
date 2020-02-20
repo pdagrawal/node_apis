@@ -1,7 +1,16 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+
+//mongoDB connection string
+const url = 'mongodb+srv://mongo-db-user:RkV8oQR70xzlB4g1@pdcluster0-fakv1.mongodb.net/test?retryWrites=true&w=majority';
+
 app.get('/', (req, res, next) => {
     res.send('running node api');
 });
-//serving the application the port 3000
-app.listen(3000, console.log('server started on port 3000'));
+
+mongoose.connect(url,{useNewUrlParser: true})
+  .then(()=>{
+    app.listen(3000);
+    console.log('database connected!');})
+  .catch(err => console.log(err));
