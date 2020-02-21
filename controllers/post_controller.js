@@ -13,6 +13,15 @@ exports.index = (req, res, next) => {
     })
 }
 
+exports.show = (req, res, next) => {
+  Post.findById(req.params.id)
+    .then(result => {
+      res.send(result);
+    }).catch(err => {
+      res.status(400).send(err);
+    })
+}
+
 exports.create = (req, res, next) => {
   const post = new Post({
     title: req.body.title,
