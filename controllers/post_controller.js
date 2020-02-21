@@ -40,7 +40,16 @@ exports.update = (req, res, next) => {
       result.image = req.body.image;
       result.save();
     }).then(() => {
-      res.status(204).send('post updated successfully');
+      res.status(204).send('Post updated successfully');
+    }).catch(err => {
+      res.status(400).send(err);
+    })
+}
+
+exports.destroy = (req, res, next) => {
+  Post.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).send('Post deleted');
     }).catch(err => {
       res.status(400).send(err);
     })
