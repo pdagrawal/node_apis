@@ -1,7 +1,16 @@
 const Post = require('../models/post_model.js');
 
-exports.index = (req, res, next) => {
+exports.welcome = (req, res, next) => {
   res.send('ruunning node api');
+}
+
+exports.index = (req, res, next) => {
+  Post.find()
+    .then(result => {
+      res.send(result);
+    }).catch(err => {
+      res.status(400).send(err);
+    })
 }
 
 exports.create = (req, res, next) => {
